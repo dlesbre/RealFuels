@@ -1106,10 +1106,8 @@ namespace RealFuels
             float thrust = _module.scale * _techLevels.ThrustTL(node.GetValue(_module.thrustRating), node);
             if (thrust >= 100f)
                 return $"{thrust:N0} kN";
-            if (thrust < 1e-3f)
-                return $"{thrust * 1e6f:N0} mN";
-            if (thrust < 0.01f)
-                return $"{thrust * 1e3f:N0} N";
+            if (thrust < 0.01f || thrust > 100000f)
+                return KSPUtil.PrintSI(thrust * 1e3f, "N", 3);
             return $"{thrust:N2} kN";
         }
 
